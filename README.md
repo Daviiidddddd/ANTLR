@@ -1,11 +1,13 @@
 # Calculadora con ANTLR (Java y Python)
 
-Este repositorio contiene la calculadora que desarrollé siguiendo el **capítulo 4** del libro *The Definitive ANTLR 4 Reference*.  
-La preparación y las pruebas las realicé en **Ubuntu** dentro de una **máquina virtual**. Todo lo que hay aquí lo armé yo: la gramática, el visitor en Java, la versión en Python y los scripts para ejecutar.
+## David Castellanos
+
+Este repositorio contiene la calculadora que se hizo siguiendo el **capítulo 4** del libro *The Definitive ANTLR 4 Reference*.  
+La preparación y las pruebas se hicieron en **Ubuntu** dentro de la **máquina virtual de virtualbox**. pero también estan en los archivos lo demás. Está la gramática, el visitor en Java, la versión en Python y los scripts para ejecutar.
 
 ---
 
-## Qué hay en este repo
+## Contenido del repositosrio
 
 - `LabeledExpr.g4` — gramática extendida (soporta `sin`, `cos`, `tan`, `sqrt`, `ln`, `log`, `!` factorial y unidades `deg`/`rad`).
 - Java:
@@ -14,26 +16,26 @@ La preparación y las pruebas las realicé en **Ubuntu** dentro de una **máquin
 - Python:
   - `eval_visitor.py` — Visitor en Python (nombres en español).
   - `calc_py.py` — programa principal para ejecutar la calculadora en Python.
-- `input.txt` — ejemplos de prueba que usé.
-- `instalar_ejecutar.sh` — script con los comandos que ejecuté en Ubuntu.
-- `.gitignore`, `LICENSE`.
+- `input.txt` — ejemplos de prueba.
+- `instalar_ejecutar.sh` — script con los comandos que de Ubuntu.
+
 
 ---
 
-## Cómo lo hice (resumen)
+## Proceso
 
-1. Instalé Java (OpenJDK) en Ubuntu.
+1. Se intala Java (OpenJDK) en Ubuntu.
 2. Descargué `antlr-4.13.1-complete.jar` y lo usé para generar el lexer/parser/visitor.
-3. Implementé un `EvalVisitor` en Java basado en el ejemplo del libro, pero adaptado a `double` para manejar funciones trigonométricas y logaritmos, y agregué:
+3. Implementamos el `EvalVisitor` en Java basado en el ejemplo del libro, pero adaptado a `double` para manejar funciones trigonométricas y logaritmos, y luego se agrega:
    - soporte para `sin`, `cos`, `tan`, `sqrt`, `ln`, `log` (base 10).
    - operador postfix factorial `!` (para enteros no-negativos).
    - manejo de grados y radianes (global con `mode deg`/`mode rad` y sobrescrito por llamada: `sin(30 deg)`).
-4. Repetí la implementación en Python (generando el parser con `-Dlanguage=Python3 -visitor` y escribiendo `eval_visitor.py`).
-5. Probé las expresiones con `input.txt` en la máquina virtual.
+4. Aca se hace otra vez la implementación en Python (generando el parser con `-Dlanguage=Python3 -visitor` y escribiendo `eval_visitor.py`).
+5. SE prueban las expresiones con `input.txt` en la máquina virtual.
 
 ---
 
-## Requisitos (lo mínimo que usé)
+## Lo que se necesita para llevarlo a cabo
 
 - Ubuntu (probado en una VM)
 - OpenJDK (jdk 17 o similar)
@@ -44,9 +46,9 @@ La preparación y las pruebas las realicé en **Ubuntu** dentro de una **máquin
 
 ---
 
-## Pasos para ejecutar (lo que yo ejecuté en mi VM)
+## Pasos para ejecutar (lo que se ejecuto en la virtual box)
 
-> Primero, si no tienes el `.jar` de ANTLR, descargarlo:
+> Primero, se busca el `.jar` de ANTLR, descargarlo:
 ```bash
 sudo mkdir -p /usr/local/lib
 sudo wget -O /usr/local/lib/antlr-4.13.1-complete.jar https://www.antlr.org/download/antlr-4.13.1-complete.jar
@@ -70,7 +72,7 @@ javac *.java
 pip3 install --user antlr4-python3-runtime
 ```
 
-> Ejecutar las pruebas que usé:
+> Ejecutar las pruebas que se usaron:
 ```bash
 # Ejecutar calculadora en Java con el archivo de ejemplo
 java Calc input.txt
@@ -85,10 +87,10 @@ El script `instalar_ejecutar.sh` contiene exactamente los comandos que usé y pu
 
 ## Notas importantes (cosas a tener en cuenta)
 
-- El factorial `!` está pensado para enteros no-negativos; si le paso un real, lo redondeo hacia abajo (lo transformé a entero).
+- El factorial `!` está pensado para enteros no-negativos entonces si le pasamos un real, lo redondeamos hacia abajo (y se transforma a entero).
 - `mode deg` / `mode rad` cambia el comportamiento trigonométrico global. También se puede usar `sin(30 deg)` para forzar grados solo en esa llamada.
 - Validé dominios: `sqrt(x)` con `x >= 0`, `ln(x)` y `log(x)` con `x > 0`.
-- Todo lo probé en **Ubuntu** dentro de una **máquina virtual**. Si usas otra plataforma, los comandos pueden variar.
+- Esto aplica principalmente para Ubuntui
 
 ---
 
@@ -101,14 +103,10 @@ El script `instalar_ejecutar.sh` contiene exactamente los comandos que usé y pu
 - `calc_py.py` — ejecutable principal en Python.
 - `input.txt` — casos de prueba que usé.
 - `instalar_ejecutar.sh` — script para automatizar la preparación en Ubuntu.
-- `.gitignore`, `LICENSE` — archivos auxiliares.
+
 
 ---
 
-## Licencia
+## Tarea de ANTLR 1 de septiembre
 
-MIT — puedo usar este proyecto libremente.
 
----
-
-Si quieres que suba esto a mi cuenta de GitHub, puedo hacerlo; si prefieres subirlo tú, dentro del repo hay todo lo necesario para hacerlo desde la VM en Ubuntu.
